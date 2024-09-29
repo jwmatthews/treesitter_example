@@ -15,8 +15,8 @@ Dependencies:
 import sys
 import os
 import argparse
+import tree_sitter_java
 from tree_sitter import Language, Parser
-from tree_sitter_languages import get_language, get_parser
 
 def parse_code(code, parser):
     """
@@ -190,8 +190,7 @@ def main():
     if not validate_line_number(line_number, total_lines):
         sys.exit(1)
 
-    language = get_language("java")
-    parser = get_parser('java')
+    parser = Parser(Language(tree_sitter_java.language()))
 
     # Parse the code
     tree = parse_code(code, parser)
